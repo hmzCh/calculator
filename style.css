@@ -70,8 +70,16 @@ button{
     background-color: #CDFCF6;
 }
 
+.numPad:hover{
+    background-color: rgb(185, 232, 226);
+}
+
 .operators{
     background-color: #BCCEF8;
+}
+
+.operators:hover{
+    background-color: rgb(168, 186, 228);
 }
 
 #clearButton, #backButton{
@@ -84,7 +92,15 @@ button{
     background-color: #FAF7FF;
 }
 
-#equalsButton {
+#clearButton:hover, #backButton:hover, #decimalButton:hover {
+    background-color: rgb(230, 227, 235);
+}
+
+#equalsButton{
     width: 170px;
     background-color: #98A8F8;
+}
+
+#equalsButton:hover{
+    background-color: rgb(132, 148, 228);
 }

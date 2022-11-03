@@ -35,3 +35,19 @@ function removeLastCharacter() {
     equation = equation.slice(0, -1)
     primaryDisplay.textContent = equation
 }
+
+function operate(no1, no2, operator) {
+    switch (operator) {
+        case "+":
+            return no1 + no2
+            break
+        case "-":
+            return no1 - no2
+            break
+        case "×":
+            return no1 * no2
+            break
+        case "÷":
+            return no1 / no2
+    }
+}

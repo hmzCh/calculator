@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#body{
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: black;
+}
+
+#display {
+    width: 320px;
+    height: 80px;
+}
+
+button{
+    height: 60px;
+}
+
+.numPad, .operators, #decimalButton{
+    width: 80px;
+}
+
+#clearButton, #backButton{
+    width: 120px;
+}
+
+#equalsButton {
+    width: 160px;
+}

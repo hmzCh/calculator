@@ -45,6 +45,7 @@ button{
     font-weight: bolder;
     font-size: large;
     color: #1F2937;
+    cursor:pointer;
 }
 
 .numPad, .operators, #decimalButton{

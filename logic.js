@@ -1,24 +1,47 @@
 const primaryDisplay = document.querySelector("#primaryDisplay")
 const secondaryDisplay = document.querySelector("#secondaryDisplay")
-let equation = ""
+let no1 = ""
+let no2 = ""
+let operator = ""
+let onSecondNumber = false
 
 const numPad = Array.from(document.querySelectorAll(".numPad"))
 numPad.forEach(button => {
-    button.addEventListener("click", () => addToDisplay(button.textContent))
+    button.addEventListener("click", () => numberClicked(button.textContent))
 }); 
-function addToDisplay(input) {
-    equation = equation + input
-    primaryDisplay.textContent = equation;
+function numberClicked(input) {
+
+    if (onSecondNumber === false) {
+        no1 = no1 + input
+        primaryDisplay.textContent = no1
+    }
+    else {
+        no2 = no2 + input
+        primaryDisplay.textContent = no2
+    }
 };
 
 const operators = Array.from(document.querySelectorAll(".operators"))
 operators.forEach(button => {
     button.addEventListener("click", () => operatorClicked(button.textContent))
 })
-
 function operatorClicked(input) {
-    equation = equation + input
-    secondaryDisplay.textContent = equation
+    operator = input
+    if (onSecondNumber === true) {
+        primaryDisplay.textContent(operate(input))
+        reset()
+    }
+    else {
+        secondaryDisplay.textContent = no1 + input
+        onSecondNumber = true 
+    }
+}
+
+const equalsButton = document.querySelector("#equalsButton")
+equalsButton.addEventListener("click", () => equalsButtonClicked())
+function equalsButtonClicked() {
+    operate()
+    reset()
 }
 
 const clearButton = document.querySelector("#clearButton")
@@ -36,7 +59,7 @@ function removeLastCharacter() {
     primaryDisplay.textContent = equation
 }
 
-function operate(no1, no2, operator) {
+function operate() {
     switch (operator) {
         case "+":
             return no1 + no2
@@ -50,4 +73,10 @@ function operate(no1, no2, operator) {
         case "÷":
             return no1 / no2
     }
+}
+
+function reset() {
+    onSecondNumber = false
+    no1 = ""
+    no2 = ""
 }

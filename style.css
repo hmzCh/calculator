@@ -33,8 +33,11 @@ body{
     border-width: 1px;
     border-radius: 7px;
     font-weight: bolder;
-    font-size: large;
+    font-size: 36px;
     background-color: #FAF7FF;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
 }
 
 button{

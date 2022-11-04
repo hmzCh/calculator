@@ -28,8 +28,10 @@ operators.forEach(button => {
 function operatorClicked(input) {
     operator = input
     if (onSecondNumber === true) {
-        primaryDisplay.textContent(operate(input))
-        reset()
+        secondaryDisplay.textContent = operate() + operator
+        primaryDisplay.textContent = operate()
+        no1 = operate()
+        no2 = ""
     }
     else {
         secondaryDisplay.textContent = no1 + input
@@ -40,26 +42,57 @@ function operatorClicked(input) {
 const equalsButton = document.querySelector("#equalsButton")
 equalsButton.addEventListener("click", () => equalsButtonClicked())
 function equalsButtonClicked() {
-    operate()
-    reset()
+    secondaryDisplay.textContent = secondaryDisplay.textContent + no2
+    primaryDisplay.textContent = operate()
+    no1 = operate().toString()
+    no2 = ""
+    operator = ""
+    //reset()
 }
 
 const clearButton = document.querySelector("#clearButton")
 clearButton.addEventListener("click", () => clearDisplay())
 function clearDisplay() {
-    equation = ""
+    no1 = ""
+    no2 = ""
+    operator = ""
+    onSecondNumber = false
     primaryDisplay.textContent = "0"
+    secondaryDisplay.textContent = ""
 }
 
 const backButton = document.querySelector("#backButton")
 backButton.addEventListener("click", () => removeLastCharacter())
 
 function removeLastCharacter() {
-    equation = equation.slice(0, -1)
-    primaryDisplay.textContent = equation
+    if (onSecondNumber === true) {
+        if (no2 == ""){
+            if (operator == "") {
+                no1 = no1.slice(0, -1)
+                console.log(no1)
+                primaryDisplay.textContent = no1
+            } else {
+            operator = ""
+            secondaryDisplay.textContent = ""
+            }
+        } else {
+        no2 = no2.slice(0, -1)
+        primaryDisplay.textContent = no2
+        }
+    }
+    else {
+        no1 = no1.slice(0, -1)
+        primaryDisplay.textContent = no1
+    }
 }
 
 function operate() {
+
+    no1 = +no1
+    no2 = +no2
+
+    if (operator == "") {return no1}
+
     switch (operator) {
         case "+":
             return no1 + no2
@@ -71,6 +104,11 @@ function operate() {
             return no1 * no2
             break
         case "÷":
+            if (no2 == 0) {
+                no1 = ""
+                no2 = ""
+                onSecondNumber = false
+                return "ERROR!"}
             return no1 / no2
     }
 }

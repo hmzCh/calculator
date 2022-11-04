@@ -83,7 +83,7 @@ function removeLastCharacter() {
                 primaryDisplay.textContent = no1
             } else {
             operator = ""           //Even if you're on the second number, if you haven't entered anything into it yet, it removes the operator
-            secondaryDisplay.textContent = ""
+            secondaryDisplay.textContent = no1
             }
         } else {
         no2 = no2.slice(0, -1)      //Removes the last character from the second number

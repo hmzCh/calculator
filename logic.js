@@ -13,7 +13,7 @@ numPad.forEach(button => {
 }); 
 function numberClicked(input) {
     
-    if (input == ".") {
+    if (input == ".") { //Checks if a decimal has already been added
         if (onSecondNumber === false && no1.includes(".") == true) {return}
         if (onSecondNumber === true && no2.includes(".") == true) {return}
     }
@@ -33,7 +33,7 @@ operators.forEach(button => {
     button.addEventListener("click", () => operatorClicked(button.textContent))
 })
 function operatorClicked(input) {
-    if (operatorEntered === true) {
+    if (operatorEntered === true) { //operates if another operator is entered without hitting the equals button again
         secondaryDisplay.textContent = operate() + input
         primaryDisplay.textContent = operate()
         no1 = operate()
@@ -54,7 +54,7 @@ equalsButton.addEventListener("click", () => equalsButtonClicked())
 function equalsButtonClicked() {
     secondaryDisplay.textContent = secondaryDisplay.textContent + no2
     primaryDisplay.textContent = operate()
-    no1 = operate().toString()
+    no1 = operate().toString()  //If the user wants to do further calculations with the answer
     no2 = ""
     operator = ""
     operatorEntered = false
@@ -77,33 +77,33 @@ const backButton = document.querySelector("#backButton")
 backButton.addEventListener("click", () => removeLastCharacter())
 
 function removeLastCharacter() {
-    if (onSecondNumber === true) {
+    if (onSecondNumber === true) {  //Checks which number to remove the last character from
         if (no2 == ""){
-            if (operator == "") {
+            if (operator == "") {   //Even if you're on the second number, if you haven't entered anything into it yet & haven't entered an operator it removes the last character of the first number
                 no1 = no1.slice(0, -1)
-                console.log(no1)
                 primaryDisplay.textContent = no1
             } else {
-            operator = ""
+            operator = ""           //Even if you're on the second number, if you haven't entered anything into it yet, it removes the operator
             secondaryDisplay.textContent = ""
             }
         } else {
-        no2 = no2.slice(0, -1)
+        no2 = no2.slice(0, -1)      //Removes the last character from the second number
         primaryDisplay.textContent = no2
         }
     }
     else {
-        no1 = no1.slice(0, -1)
+        no1 = no1.slice(0, -1)      //Removes the last character from the first number
         primaryDisplay.textContent = no1
     }
 }
 
 function operate() {
 
+    //Converts the numbers from strings to integers
     no1 = +no1
     no2 = +no2
 
-    if (operator == "") {return no1}
+    if (operator == "") {return no1}  //If an operator hasn't been selected, it just returns the first number
 
     switch (operator) {
         case "+":
@@ -116,7 +116,7 @@ function operate() {
             return no1 * no2
             break
         case "÷":
-            if (no2 == 0) {
+            if (no2 == 0) {         //What happens if you try to divide by zero
                 no1 = ""
                 no2 = ""
                 onSecondNumber = false

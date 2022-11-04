@@ -33,19 +33,20 @@ operators.forEach(button => {
     button.addEventListener("click", () => operatorClicked(button.textContent))
 })
 function operatorClicked(input) {
-    operator = input
     if (operatorEntered === true) {
-        secondaryDisplay.textContent = operate() + operator
+        secondaryDisplay.textContent = operate() + input
         primaryDisplay.textContent = operate()
         no1 = operate()
         no2 = ""
-        operatorEntered = false
+        //operatorEntered = false
     }
     else {
         secondaryDisplay.textContent = no1 + input
         onSecondNumber = true 
         operatorEntered = true
     }
+
+    operator = input
 }
 
 const equalsButton = document.querySelector("#equalsButton")
@@ -56,6 +57,7 @@ function equalsButtonClicked() {
     no1 = operate().toString()
     no2 = ""
     operator = ""
+    operatorEntered = false
     //reset()
 }
 
@@ -119,7 +121,7 @@ function operate() {
                 no2 = ""
                 onSecondNumber = false
                 return "ERROR!"}
-            return no1 / no2
+            return (no1 / no2).toFixed(10)
     }
 }
 

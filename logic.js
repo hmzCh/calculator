@@ -4,16 +4,23 @@ let no1 = ""
 let no2 = ""
 let operator = ""
 let onSecondNumber = false
+let operatorEntered = false
+
 
 const numPad = Array.from(document.querySelectorAll(".numPad"))
 numPad.forEach(button => {
     button.addEventListener("click", () => numberClicked(button.textContent))
 }); 
 function numberClicked(input) {
-
+    
+    if (input == ".") {
+        if (onSecondNumber === false && no1.includes(".") == true) {return}
+        if (onSecondNumber === true && no2.includes(".") == true) {return}
+    }
+    
     if (onSecondNumber === false) {
         no1 = no1 + input
-        primaryDisplay.textContent = no1
+        primaryDisplay.textContent = no1        
     }
     else {
         no2 = no2 + input
@@ -27,15 +34,17 @@ operators.forEach(button => {
 })
 function operatorClicked(input) {
     operator = input
-    if (onSecondNumber === true) {
+    if (operatorEntered === true) {
         secondaryDisplay.textContent = operate() + operator
         primaryDisplay.textContent = operate()
         no1 = operate()
         no2 = ""
+        operatorEntered = false
     }
     else {
         secondaryDisplay.textContent = no1 + input
         onSecondNumber = true 
+        operatorEntered = true
     }
 }
 
@@ -57,6 +66,7 @@ function clearDisplay() {
     no2 = ""
     operator = ""
     onSecondNumber = false
+    operatorEntered = false
     primaryDisplay.textContent = "0"
     secondaryDisplay.textContent = ""
 }

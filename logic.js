@@ -18,7 +18,7 @@ function numberClicked(input) {
         if (onSecondNumber === true && no2.includes(".") == true) {return}
     }
     
-    if (onSecondNumber === false) {
+    if (onSecondNumber === false || operatorEntered === false) {
         no1 = no1 + input
         primaryDisplay.textContent = no1        
     }
@@ -75,7 +75,6 @@ function clearDisplay() {
 
 const backButton = document.querySelector("#backButton")
 backButton.addEventListener("click", () => removeLastCharacter())
-
 function removeLastCharacter() {
     if (onSecondNumber === true) {  //Checks which number to remove the last character from
         if (no2 == ""){
@@ -119,13 +118,19 @@ function operate() {
             if (no2 == 0) {         //What happens if you try to divide by zero
                 no1 = ""
                 no2 = ""
+                operator = ""
                 onSecondNumber = false
+                operatorEntered = false
                 return "ERROR!"}
-            return (no1 / no2).toFixed(10)
+            if (Number.isInteger(no1/no2) == false) { //Checks if the answer is an integer or not & if it is...
+                return (no1 / no2).toFixed(5).replace(/0+$/, "") //Rounds to 10 decimal places but truncates additional zeros
+            } else {
+                return no1 / no2
+            }
     }
 }
 
-function reset() {
+function reset() {  //Don't use because everywhere where it "resets" is slightly different
     onSecondNumber = false
     no1 = ""
     no2 = ""
